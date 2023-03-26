@@ -1,96 +1,111 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="hHh Lpr lff">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <q-btn flat dense round icon="menu" aria-label="Menu" @click="toggleLeftDrawer" />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="text-bold row items-center q-pa-md q-gutter-sm">
+          <img src="../../public/icons/favicon-96x96.png" alt="Project Logo" style="width: 36px; height: 36px">
+          <div>
+            Chuck Booking Site
+          </div>
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div class="q-pa-md q-gutter-sm">
+          <q-btn color="secondary" icon-right="how_to_reg" label="Sign Up" />
+          <q-btn color="secondary" icon-right="login" label="Login" />
+          <q-btn color="secondary" icon-right="logout" label="Logout" />
+        </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+    <q-drawer v-model="leftDrawerOpen" :width="200" :breakpoint="500" overlay bordered class="bg-grey-3">
+      <q-img class="absolute-top" src="https://cdn.quasar.dev/img/material.png" style="height: 150px">
+        <div class="absolute-bottom bg-transparent">
+          <q-avatar size="40px" class="q-mb-sm">
+            <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+          </q-avatar>
+          <div class="text-weight-bold">Charly Correa M.</div>
+          <div>@CharlyCMz</div>
+        </div>
+      </q-img>
+      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
+        <q-list>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
+          <template v-for="(menuItem, index) in menuList" :key="index">
+            <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
+              <q-item-section avatar>
+                <q-icon :name="menuItem.icon" />
+              </q-item-section>
+              <q-item-section>
+                {{ menuItem.label }}
+              </q-item-section>
+            </q-item>
+            <q-separator :key="'sep' + index" v-if="menuItem.separator" />
+          </template>
+
+        </q-list>
+      </q-scroll-area>
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
+    <q-footer class="bg-indigo-1 text-black">
+      <q-toolbar class="justify-center">
+        <div>
+          <div>Copyright © Booking Site 2023 by CharlyCMz</div>
+          <div class="footer-icons">
+            <a href="https://www.linkedin.com/in/charlycmz/" style="height: 20px;">
+              <img src="../../public/icons/linkedin.png" alt="LinkedIn" style="width: 20px; height: 20px">
+            </a>
+            <a href="https://github.com/CharlyCMz" style="height: 20px;">
+              <img src="../../public/icons/signo-de-github.png" alt="GitHub" style="width: 20px; height: 20px">
+            </a>
+            <a href="https://www.instagram.com/charlycm.91/" style="height: 20px;">
+              <img src="../../public/icons/instagram.png" alt="Instagram" style="width: 20px; height: 20px">
+            </a>
+          </div>
+        </div>
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
 
-const linksList = [
+const menuList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    icon: 'home',
+    label: 'Home',
+    separator: true
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    icon: 'send',
+    label: 'Messages',
+    separator: false
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
+    icon: 'event_available',
+    label: 'My Bookings',
+    separator: true
   },
   {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
+    icon: 'settings',
+    label: 'Settings',
+    separator: false
   },
   {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
+    icon: 'feedback',
+    label: 'Send Feedback',
+    separator: false
   },
   {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    icon: 'help',
+    iconColor: 'primary',
+    label: 'Help',
+    separator: false
   }
 ]
 
@@ -98,19 +113,30 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+
   },
 
-  setup () {
+  setup() {
     const leftDrawerOpen = ref(false)
 
     return {
-      essentialLinks: linksList,
+      menuList,
       leftDrawerOpen,
-      toggleLeftDrawer () {
+      toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
     }
   }
 })
 </script>
+
+<style>
+.footer-icons {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-icons a {
+  padding-left: 8px;
+}
+</style>

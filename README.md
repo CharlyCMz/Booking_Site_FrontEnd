@@ -1,4 +1,4 @@
-# Booking_Site_FrontEnd (quasar-project)
+# Booking_Site_FrontEnd
 
 Glamping and hotel booking e-commerce web site
 
