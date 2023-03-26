@@ -12,7 +12,7 @@
         </q-toolbar-title>
 
         <div class="q-pa-md q-gutter-sm">
-          <q-btn color="secondary" icon-right="how_to_reg" label="Sign Up" />
+          <q-btn color="accent" icon-right="how_to_reg" label="Sign Up" />
           <q-btn color="secondary" icon-right="login" label="Login" />
           <q-btn color="secondary" icon-right="logout" label="Logout" />
         </div>
@@ -56,14 +56,14 @@
         <div>
           <div>Copyright © Booking Site 2023 by CharlyCMz</div>
           <div class="footer-icons">
-            <a href="https://www.linkedin.com/in/charlycmz/" style="height: 20px;">
-              <img src="../../public/icons/linkedin.png" alt="LinkedIn" style="width: 20px; height: 20px">
+            <a href="https://www.linkedin.com/in/charlycmz/" target="blank" style="height: 25px;">
+              <q-icon name="img:../../public/icons/linkedin-icon.svg" size="25px" />
             </a>
-            <a href="https://github.com/CharlyCMz" style="height: 20px;">
-              <img src="../../public/icons/signo-de-github.png" alt="GitHub" style="width: 20px; height: 20px">
+            <a href="https://github.com/CharlyCMz" target="blank" style="height: 20px;">
+              <q-icon name="img:../../public/icons/github-icon.svg" size="20px" />
             </a>
-            <a href="https://www.instagram.com/charlycm.91/" style="height: 20px;">
-              <img src="../../public/icons/instagram.png" alt="Instagram" style="width: 20px; height: 20px">
+            <a href="https://www.instagram.com/charlycm.91/" target="blank" style="height: 20px;">
+              <q-icon name="img:../../public/icons/instagram-icon.svg" size="20px" />
             </a>
           </div>
         </div>
